@@ -1,0 +1,103 @@
+﻿
+{% extends "dashboard/adminlayout.html" %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+ 
+  {% load staticfiles %}
+   <link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" />
+<div class="page has-sidebar-left">
+    <header class="blue accent-3 relative">
+        <div class="container-fluid text-white">
+            <div class="row p-t-b-10 ">
+                <div class="col">
+                    <h4>
+                        <i class="icon-package"></i>
+                             <a href="{% url 'organization_list' %}">Organization</a> 
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="nav responsive-tab nav-material nav-material-white">
+                    <li>
+                        <a class="nav-link active"  href="organization"><i class="icon icon-list"></i>All Organization</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="new"><i
+                                class="icon icon-plus-circle"></i> Add New Organization</a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid animatedParent animateOnce my-3">
+        <div class="animated fadeInUpShort">
+         
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card no-b shadow">
+                        <div class="card-body p-0">
+                            <div class="table-responsive" style="padding:30px">
+        
+
+                    <div class="col-md-10">
+
+                                <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th  >#</th>
+      <th  >Organization Name</th>
+      <th >summary</th>
+      <th  >Edit</th>
+      <th >Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for organization in object_list %}
+    <tr>
+      <td> {{ forloop.counter }}</td>
+      <td>{{ organization.orgname }}</td>
+      <td>{{ organization.summary }}</td>
+      <td> <a href="{% url 'organization_edit'  organization.id %}">edit</a></td>
+         <td>  <a href="{% url 'organization_delete' organization.id %}">delete</a></td>
+    </tr>
+        {% endfor %}
+    
+  </tbody>
+</table>
+
+          {% block pagination %}
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+  {% endblock %} 
+
+ </div>
+
+
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+        </div>
+    </div>
+</div>
+ 
+ {% endblock %}
+

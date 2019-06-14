@@ -1,0 +1,101 @@
+{% extends "dashboard/layout.html" %}
+
+{% block content %}
+
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;">
+   
+</div>
+
+
+ 
+
+<div class="row" >
+    <div class="col-md-4">
+       <a href="{% url 'businesscontinuity' %}">     <h4>BUSINESS CONTINUITY</h4></a> 
+        
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'socialnetworks' %}">    <h4>SOCIAL NETWORKS</h4></a>        
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'contactcenter' %}">    <h4>CONTACT CENTER
+</h4></a> 
+   
+    </div>
+ 
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+       <a href="{% url 'datacenter' %}">     <h4> 
+ 
+DATA CENTER</h4></a> 
+        
+    </div>
+    <div class="col-md-4">
+     <a href="{% url 'videomn' %}">      <h4>VIDEO  MN</h4></a> 
+       
+    </div>
+    <div class="col-md-4">
+       <a href="{% url 'humanassets' %}">   <h4>HUMAN ASSETS
+
+</h4></a> 
+   
+    </div>
+ 
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="{% url 'hardware' %}">   <h4> 
+ 
+HARDWARE </h4></a> 
+        
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'software' %}">      <h4>SOFTWARE
+</h4></a> 
+       
+    </div>
+    <div class="col-md-4">
+            <a href="{% url 'cloud' %}"><h4>CLOUD 
+
+</h4></a> 
+   
+    </div>
+ 
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <a href="{% url 'mobile' %}"><h4> 
+ 
+MOBILE
+ </h4></a> 
+        
+    </div>
+    <div class="col-md-4">
+         <a href="{% url 'security' %}"><h4>SECURITY
+</h4></a>
+       
+    </div>
+    <div class="col-md-4">
+       <a href="{% url 'database' %}"><h4>DATABASE</h4></a>  
+   
+    </div>
+ 
+</div>
+<hr />
+
+
+<div class="row"><div class="col-md-4"> <a href="{% url 'analytics' %}">ANALYTICS</a> </div></div>
+<div class="row"><div class="col-md-4"> <a href="{% url 'recurrentexp' %}">RECURRENT EXPENDITURE</a> </div></div>
+<div class="row"><div class="col-md-4"> <a href="{% url 'capex' %}">CAPEX AMORTIXZATION</a>  </div></div>
+ <div class="row"><div class="col-md-4"> <a href="{% url 'ictmaturityscore' %}">ICT MATURITY SCORE</a>  </div></div>
+  <div class="row"><div class="col-md-4"> <a href="{% url 'scenarios' %}">SCENARIOS</a>  </div></div>
+ <div class="row"><div class="col-md-4"> <a href="{% url 'accesslog' %}">ACCESS LOG</a>  </div></div>
+ <div class="row"><div class="col-md-4"> <a href="{% url 'postcomment' %}">POST COMMENT</a>  </div></div>
+ <div class="row"><div class="col-md-4"> <a href="{% url 'help' %}">HELP</a> </div></div>
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+{% endblock %}

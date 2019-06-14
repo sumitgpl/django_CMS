@@ -1,0 +1,99 @@
+﻿{% extends "dashboard/layout1.html" %}
+
+{% block content %}
+
+ 
+  {% load staticfiles %}
+<main>
+    <div id="primary" class="p-t-b-100 height-full ">
+        <div class="container">
+                <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">  
+                        <h0 class="navbar-brand"><b>CDASH</b></h0>
+                        <div>
+                        <a href="#"onclick="showabout()"><h1 class="navbar-brand">ABOUT |</h1></a>
+                        <a href="#" onclick="showdiv()"><h1 class="navbar-brand">LOGIN |</h1></a>
+                        {{abt.summary}}
+                        </div>
+                        </div>
+                        <br/>        
+                        <br/> 
+                        <br/>     
+            <div class="row" id="logindtl">
+                <div class="col-lg-4 mx-md-auto">
+                    <div class="text-center">
+                        <!-- <img src="{% static 'cdata/img/dummy/u5.png' %}"   alt=""/>
+                      
+                        <h3 class="mt-2">Welcome Back</h3>-->
+                        
+                    </div>
+                 <form class="form-signin" method="post">
+
+                        {% csrf_token %}                
+                        <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                     <input type="text" id="username" name="username" class="form-control form-control-lg"
+                                   placeholder="Email Address" > 
+                        
+                        </div>
+                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                          <input type="password" name="password" id="password" class="form-control form-control-lg"
+                                   placeholder="Password">
+                        </div>
+                        <input type="submit" class="btn btn-success btn-lg btn-block" value="Log In">
+                    </form>
+                </div>
+            </div>
+            <div class="row" id="aboutdtl">
+                <p id='aboutsmry'></p>
+
+            </div>
+        </div>
+    </div>
+    <!-- #primary -->
+</main>
+ 
+          
+      
+
+     {% endblock %}
+
+
+{% block scripts %}
+
+  
+<script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
+
+<script>
+    document.getElementById("logindtl").style.display = "none";
+function showdiv() {
+  var abt = document.getElementById("aboutdtl");
+  abt.style.display = "none";
+
+  var x = document.getElementById("logindtl");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } 
+}
+function showabout(){
+  var x = document.getElementById("logindtl");
+  x.style.display = "none";
+  var abt = document.getElementById("aboutdtl");
+  abt.style.display = "block";
+  var smry = document.getElementById("aboutsmry");
+  $.ajax(
+    {
+        type:"GET",
+        url: "/about",
+        data:{},
+        success: function( data ) 
+        {
+          $("#aboutsmry").text(data.abt);
+          console.log(data);
+        }
+     })
+}
+</script>
+
+{% endblock %}
+
+       
+    

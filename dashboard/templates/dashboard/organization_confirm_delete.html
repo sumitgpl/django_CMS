@@ -1,0 +1,70 @@
+﻿
+
+{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+ 
+  {% load staticfiles %}
+
+
+<div class="page has-sidebar-left">
+    <header class="blue accent-3 relative">
+        <div class="container-fluid text-white">
+            <div class="row p-t-b-10 ">
+                <div class="col">
+                    <h4>
+                        <i class="icon-package"></i>
+                    <a href="{% url 'organization_list' %}">Organization</a>: Delete? 
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="nav responsive-tab nav-material nav-material-white">
+                    <li>
+                        <a class="nav-link" href="{% url 'organization_list' %}"><i class="icon icon-list"></i>All Organization</a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" href="{% url 'organization_new' %}"><i
+                                class="icon icon-plus-circle"></i> Add New Organization</a>
+                    </li>
+                 
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container-fluid animatedParent animateOnce my-3">
+        <div class="animated fadeInUpShort">
+            <form id="needs-validation" method="post" novalidate >
+                 {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-8 ">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                           
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                  Are you sure you want to delete "{{ object }}" ?<br>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mt-4">
+                            
+                             
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-primary" type="submit">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+ {% endblock %}
+
+
+ 

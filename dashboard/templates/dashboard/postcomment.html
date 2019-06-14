@@ -1,0 +1,114 @@
+﻿ 
+{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<div style="padding:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;">
+
+     <div class="page-header">
+         
+    </div>
+    <div class="row">
+    	 
+        <div class="col-md-12">
+                <div class="panel with-nav-tabs panel-danger" id ='sentprompt' style="display:none">
+                    <h2>Comment has been sent to users !!</h2>
+                </div>
+            <div class="panel with-nav-tabs panel-danger" id='postcommentbox'>
+            
+            
+                <div class="panel-body" id="postboxitems">
+                     <div class="row" >
+                            <textarea name="message" rows="5" cols="100" onInput="changecount()" id="message" maxlength="2000"></textarea>
+
+                            <div class="col-md-2">  </div>
+                             <div class="col-md-4">   </div>
+                             <div class="col-md-4"> </div>
+                             <div class="col-md-2" id="charcnt">0/2000 </div>
+                        </div>
+                    <hr />
+                    {% for user in usrlist %}
+                     <div class="row">
+                            <div class="col-md-2">  </div>
+                            <div class="col-md-4"> </div>
+                             <div class="col-md-4">{{user.get_username}}</div>
+                             <div class="col-md-1" style="text-align:center; vertical-align:middle;">
+                                 <input type="checkbox" id='{{user.id}}' name='checkbox'/> 
+                             </div>
+                            <div class="col-md-1"> </div>
+                     </div>
+                    {% endfor %}  
+                  <!--<div class="events"></div>
+                      <div class="row" >
+                            <div class="col-md-2">  </div>
+                             <div class="col-md-4"> DEBO AKINWANDE  </div>
+                             <div class="col-md-4"> </div>
+                             <div class="col-md-1">
+                                 <input class="form-control form-control-sm" /> </div>
+                          <div class="col-md-1"> </div>
+                        </div>
+                            <div class="events"></div>
+                        <div class="row" >
+                            <div class="col-md-2">  </div>
+                             <div class="col-md-4">BRENDA JESSICA ADE  </div>
+                             <div class="col-md-4"> </div>
+                             <div class="col-md-1"><input class="form-control form-control-sm" /> </div>
+                          <div class="col-md-1"> </div>
+                        </div>
+                </div>-->
+
+                <div class="panel-footer" >
+
+                    <div class="row">  <div class="col-md-4"></div>
+                       <div class="col-md-6"></div>
+                    <div class="col-md-2">  
+                         <input type="submit" value="SUBMIT" class="btn btn-default" onclick="submitclick()"/></div></div>
+                    
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+  
+</div>
+<script>
+function submitclick() {
+    var chkArray = [];
+  $("#postboxitems input:checkbox:checked").each(function(i,v) {
+  chkArray.push($(v).attr('id'));
+});
+        console.log(chkArray);
+        var commstr = document.getElementById("message").value;
+        myObj = { "userlist":chkArray, "comments":commstr,'orgid':'{{orgdata.id}}' };
+
+        $.ajax({
+            url: './postcommentsmtp',
+            global: false,
+            type: 'POST',
+            'contentType': 'application/json; charset=utf-8',
+            data: JSON.stringify(myObj),
+            async: true, //blocks window close
+            'dataType': 'json',
+            success: function() {}
+        });
+
+        document.getElementById("postcommentbox").style.display="none";
+        document.getElementById("sentprompt").style.display="block";
+
+        
+}
+function changecount(){
+    var tagid = document.getElementById("message").value;
+    var newstr = tagid.length + '/2000'
+    document.getElementById("charcnt").innerHTML = newstr;
+}
+</script>
+{% endblock %}

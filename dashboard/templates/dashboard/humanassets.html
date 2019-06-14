@@ -1,0 +1,192 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+{% load img_filter %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.bundle.min.js" type="text/javascript"></script>
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<div style="padding:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;">
+    <hr />
+<div class="row" >
+    <div class="col-md-4"> HUMAN ASSETS
+    </div>  
+</div>
+      <hr />
+</div>
+
+<div style="padding:30px;font-size:21px;margin-bottom:30px;font-weight:200;line-height:2.1428571435;color:inherit;">
+<div class="row" >
+    <div class="col-md-4">
+        <h4>SUMMARY</h4>
+        
+    </div>
+    
+</div>
+ <div class="row" >
+    <div class="col-md-12">
+     <p>{{ha.summary}}
+ </p> 
+    </div>
+</div>
+    </div>
+
+<div style="padding:30px;">
+<div class="col-md-4"><span id='all'><a href="/gethumanassetdataall">VIEW BY ALL</a> </span></div>
+<div class="col-md-4"><span id ='job'><a href="/gethumanassetdatajob">VIEW BY JOB FOCUS</a>  </span></div>
+<div class="col-md-4"><span id = 'skill'><a href="/gethumanassetdataskill">VIEW SKILLS MAP ANALYSIS</a> </span></div>
+<div class="col-md-4"><span id ='exp'><a href="/gethumanassetdataexp">EXPENDITURE</a></span></div>
+<div class="col-md-4"><span id ='ass' >VIEW SKILL ASSESSMENT COMMENTS
+ </span></div>
+</div>
+
+<!-- for VIEW BY ALL  -->
+{% for alldata in haall %} 
+<hr />
+<div class="row" style="padding:30px;">
+        <div  class="col-md-4"> 
+                <div class="row" ><h3>{{alldata.empname}}</h3></div>
+                <div class="row" ><b>Job Focus : </b> {{alldata.jobfocus}}</div>
+                <div class="row" ><b>Expenditure : </b> {{alldata.expenditure}}</div>
+                <div class="row" ><b>Skill Map : </b> {{alldata.skillmap}}</div>
+                <div class="row" ><b>Skill Assessment Comments : </b> {{alldata.skillassessmentcomments}}</div>
+                {% for fld in alldata.humanassetempfields_set.all %}
+                <div class="row" ><b>{{fld.fieldname}} : </b> {{fld.fieldvalue}}</div>
+                {% endfor %}
+                
+        </div>
+        <div  class="col-md-4"> </div>
+        <div class="col-md-4"> 
+                <img src="{{ alldata.emp_Img.url|img_filter }}" class="img-responsive" style="width: 30%; float: right; margin-right: 10px;" />            
+        </div>                    
+</div>
+{% endfor %}  
+
+<!-- for VIEW BY JOB FOCUS  -->
+{% for alljob in hajob %}
+<hr />
+<div class="row" style="padding:30px;">
+        
+        <div  class="col-md-4"> 
+                <div class="row" ><h5><u>{{alljob.jobfocus}}</u></h5></div>                
+        </div>
+        <div  class="col-md-4"> </div>
+        <div  class="col-md-2"> </div>
+        <div class="col-md-2"> 
+                <div class="row" ><h5>{{alljob.cnt}}</h5></div>
+        </div>       
+            
+</div>
+<div class="row" style="padding:30px;">
+        {% for alldata in alldata %}
+        {% if alldata.jobfocus ==  alljob.jobfocus %}
+        <div  class="col-md-1">
+                    <img src="{{ alldata.emp_Img.url|img_filter }}" class="img-responsive" style="width: 50%; float: left; margin-right: 5px;" />            
+        </div>
+        {% endif %}
+        {% endfor %} 
+        <div  class="col-md-4"> </div>
+        <div  class="col-md-4"> </div>        
+        <div  class="col-md-2"> 
+                <div class="row" ><h5>ALIGNMENT SCORE {{alljob.alignscore}}/10</h5></div>
+        </div>
+
+</div>
+<hr /> 
+{% endfor %}  
+
+<!-- for VIEW BY EXPENDITURE -->
+{% for alljob in haexp %}
+<hr />
+<div class="row" style="padding:30px;">
+        
+        <div  class="col-md-4"> 
+                <div class="row" ><h5><u>{{alljob.jobfocus}}</u></h5></div>                
+        </div>
+        <div  class="col-md-4"> <div class="row" ><h5>{{alljob.cnt}}</h5></div> </div>
+        <div  class="col-md-2"> </div>
+        <div class="col-md-2"> 
+                <div class="row" ><h5>N{{alljob.exp}} PER ANNUM</h5></div>
+        </div>       
+            
+</div>
+<div class="row" style="padding:30px;">
+        {% for alldata in alldata %}
+        {% if alldata.jobfocus ==  alljob.jobfocus %}
+        <div  class="col-md-1">
+                    <img src="{{ alldata.emp_Img.url|img_filter }}" class="img-responsive" style="width: 50%; float: left; margin-right: 5px;" />            
+        </div>
+        {% endif %}
+        {% endfor %} 
+        <div  class="col-md-4"> </div>
+        <div  class="col-md-4"> </div>        
+        <div  class="col-md-2"> 
+                <div class="row" ><h5>ALIGNMENT SCORE {{alljob.alignscore}}/10</h5></div>
+        </div>
+</div>
+<hr /> 
+{% endfor %}  
+
+<!-- for VIEW SKILLS MAP ANALYSIS -->
+{% if haskill %}
+<canvas id="myChart"></canvas>
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+</div>
+<script type="text/javascript">
+
+var labelsdata = [{% for hadata in haskill %} '{{hadata.jobfocus}}' , {% endfor %}];
+var dataval = [{% for hadata in haskill %} {{hadata.alignscore}} , {% endfor %}];
+var data = {
+            labels:  labelsdata ,
+            datasets: [
+                {
+                label: "SKILLS MAP ANALYSIS",
+                backgroundColor: "rgba(200,80,132,0.8)",
+                data: dataval
+                }
+            ]
+            };
+
+var ctx = document.getElementById("myChart").getContext("2d");
+new Chart(ctx, {
+  type: 'horizontalBar',
+  data: data,
+  options: {
+    scales: {
+        xAxes: [{
+            barPercentage: 0.10,
+            categoryPercentage:0.25,
+            barThickness: 2,
+            maxBarThickness: 3,
+            minBarLength: 0,
+            gridLines: {
+                offsetGridLines: false
+            },
+            ticks:{
+                    beginAtZero: true,
+                    max:10,
+                    steps:10,
+                    stepValue:1,
+                    scaleGridLineWidth: 0.5,
+            }
+        }],
+        yAxes: [{
+            barPercentage: 0.25,
+            categoryPercentage: 0.5,
+            barThickness: 0.5,
+            maxBarThickness: 0.5,
+            minBarLength: 0,
+            gridLines: {
+                offsetGridLines: true
+            },
+            ticks:{
+                    scaleGridLineWidth: 0.5,
+            }
+        }],
+    }
+}
+});
+        </script>
+{% endif %}
+{% endblock %}

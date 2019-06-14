@@ -1,0 +1,55 @@
+﻿{% extends "dashboard/layout1.html" %}
+
+{% block content %}
+
+ 
+  {% load staticfiles %}
+<main>
+    <div id="primary" class="p-t-b-100 height-full ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mx-md-auto">
+                    <div class="text-center">
+                         <img src="{% static 'cdata/img/dummy/u5.png' %}"   alt=""/>
+                      
+                        <h3 class="mt-2">Welcome Back</h3>
+                         
+                    </div>
+                 <form class="form-signin" method="post" action="/dashboard">
+
+                        {% csrf_token %}                
+                        <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                     <input type="text" id="username" name="username" class="form-control form-control-lg"
+                                   placeholder="Email Address" > 
+                        
+                        </div>
+                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                          <input type="password" name="password" id="password" class="form-control form-control-lg"
+                                   placeholder="Password">
+                        </div>
+                        <input type="submit" class="btn btn-success btn-lg btn-block" value="Log In">
+                        <p class="forget-pass">Have you forgot your username or password ?</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #primary -->
+</main>
+ 
+          
+       
+  
+
+     {% endblock %}
+
+
+{% block scripts %}
+
+  
+<script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
+
+{% endblock %}
+
+       
+    

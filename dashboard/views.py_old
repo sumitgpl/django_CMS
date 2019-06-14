@@ -1,0 +1,363 @@
+from django.shortcuts import render
+from django.http import HttpResponse,HttpRequest
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+
+from .models import AccessLog,ContactCenter,Profile
+
+# Create your views here.
+
+@login_required
+def index(request):
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='dashboard')
+    return render(
+        request,
+        'dashboard/dashboard.html',
+                {'user':request.user}       
+    )
+
+
+@login_required
+def dash(request):
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='dashboard')
+    return render(
+        request,
+        'dashboard/dashboard.html',
+                {'user':request.user}       
+    )
+
+@login_required
+def contact(request):
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='contact')
+    return render(
+        request,
+        'dashboard/contact.html',
+        {
+            'title':'Contact',
+            'message':'Your contact page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def about(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='about')
+    return render(
+        request,
+        'dashboard/about.html',
+        {
+            'title':'About',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def database(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='database')
+    return render(
+        request,
+        'dashboard/database.html',
+        {
+            'title':'database',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def recurrentexp(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='recurrentexp')
+    return render(
+        request,
+        'dashboard/recurrentexp.html',
+        {
+            'title':'RECURRENT EXPENDITURE ',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def humanassets(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='humanassets')
+    return render(
+        request,
+        'dashboard/humanassets.html',
+        {
+            'title':'HUMAN ASSETS',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def ictmaturityscore(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='ictmaturityscore')
+    return render(
+        request,
+        'dashboard/ictmaturityscore.html',
+        {
+            'title':'ICT TRENDS IN SECTOR',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def accesslog(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='accesslog')
+    return render(
+        request,
+        'dashboard/accesslog.html',
+        {
+            'title':'ACCESS LOG',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def postcomment(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='postcomment')
+    return render(
+        request,
+        'dashboard/postcomment.html',
+        {
+            'title':'POST COMMENT',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+            'userlist':User.objects.all(),
+        }
+    )
+
+@login_required
+def socialnetworks(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='socialnetworks')
+    return render(
+        request,
+        'dashboard/socialnetworks.html',
+        {
+            'title':'SOCIAL NETWORKS',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def businesscontinuity(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='businesscontinuity')
+    return render(
+        request,
+        'dashboard/businesscontinuity.html',
+        {
+            'title':'business continuity',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def contactcenter(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='contactcenter')
+    return render(
+        request,
+        'dashboard/contactcenter.html',
+        {
+            'title':'contact center',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+            'contactlist':ContactCenter.objects.all()
+        }
+    )
+
+@login_required
+def datacenter(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='datacenter')
+    return render(
+        request,
+        'dashboard/datacenter.html',
+        {
+            'title':'data center',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def videomn(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='videomn')
+    return render(
+        request,
+        'dashboard/videomn.html',
+        {
+            'title':'videomn',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def hardware(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='hardware')
+    return render(
+        request,
+        'dashboard/hardware.html',
+        {
+            'title':'hardware',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def software(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='software')
+    return render(
+        request,
+        'dashboard/software.html',
+        {
+            'title':'software',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def cloud(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='cloud')
+    return render(
+        request,
+        'dashboard/cloud.html',
+        {
+            'title':'cloud',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def mobile(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='mobile')
+    return render(
+        request,
+        'dashboard/cloud.html',
+        {
+            'title':'cloud',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def security(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='security')
+    return render(
+        request,
+        'dashboard/cloud.html',
+        {
+            'title':'cloud',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def analytics(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='analytics')
+    return render(
+        request,
+        'dashboard/analytics.html',
+        {
+            'title':'analytics',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def capex(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='capex')
+    return render(
+        request,
+        'dashboard/capex.html',
+        {
+            'title':'capex',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def scenarios(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='scenarios')
+    return render(
+        request,
+        'dashboard/scenarios.html',
+        {
+            'title':'scenarios',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    )
+
+@login_required
+def help(request):
+    """Renders the about page."""
+    assert isinstance(request, HttpRequest)
+    aclog = AccessLog.objects.create(userid=request.user.id,pagename='help')
+    return render(
+        request,
+        'dashboard/help.html',
+        {
+            'title':'help',
+            'message':'Your application description page.',
+            'year':datetime.now().year,
+        }
+    ) 
+
+

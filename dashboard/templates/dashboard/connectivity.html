@@ -1,0 +1,51 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+{% load img_filter %}
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+
+<div style="padding:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;">
+{% for net in netlist %}    
+<div class="row" >
+    <div class="col-md-12"> 
+        <img src="{{ net.net_Img.url|img_filter }}" class="img-responsive" style="width: 50%; float: left; margin-right: 10px;" />
+       
+    </div>  
+    
+     
+</div>
+      <hr />
+</div>
+
+<div style="padding:30px;font-size:21px;margin-bottom:30px;font-weight:200;line-height:2.1428571435;color:inherit;">
+<div class="row" >
+    <div class="col-md-4">
+        <h4>SUMMARY</h4>
+        
+    </div>
+</div>
+ <div class="row" >
+    <div class="col-md-12">
+     <p>{{net.summary}} </p> 
+
+    </div>
+</div>
+{% for fld in net.connectivityfields_set.all %}
+ <div class="row" >
+      <div class="col-md-3">
+  <h4> {{fld.fieldname}} </h4>     </div>   <div class="col-md-8"> <h5>{{fld.fieldvalue}}  </h5> 
+          </div>
+
+ </div>
+ {% endfor %}
+
+    </div>
+{% endfor %}  
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+</div>
+  
+{% endblock %}

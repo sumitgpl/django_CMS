@@ -1,0 +1,63 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+{% load img_filter %}
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<div class="row" >
+<!--<div class="col-xs-6 col-sm-4">
+         <div class="panel panel-primary">
+          <div class="panel-heading">POSITION 2</div>
+          <table class="table table-striped">
+            <tr> <td>Enter ICON </td></tr>
+            <tr><td>ENTER TITLE</td></tr>
+          
+          </table>
+        </div>
+</div>
+<div class="col-xs-6 col-sm-4">
+         <div class="panel panel-primary">
+          <div class="panel-heading">POSITION 1 </div>
+          <table class="table table-striped">
+            <tr> <td>Enter ICON </td></tr>
+            <tr><td>ENTER TITLE</td></tr>
+          
+          </table>
+        </div>
+</div> -->
+</div>
+{% for contact in contactlist %}
+<div class="row">
+
+    <div class="col-xs-6 col-sm-4">
+      <table class="table table-striped">
+          <tr><td><img src="{{ contact.contact_Img.url|img_filter }}" class="img-responsive" style="width: 30%; float: left; margin-right: 10px;" /></td></tr>
+          {% for fld in contact.contactcenterfields_set.all %}
+          <tr><td><b>{{fld.fieldname}} :</b> {{fld.fieldvalue}}</td></tr>
+          {% endfor %}          
+          </table>
+    </div>
+ 
+    <div class="col-xs-6 col-sm-4">
+      <table class="table table-striped" style="font-size:9px">
+        <tr><td>DATE ACQUIRED: {{contact.dateacquired}}  </td></tr>
+        <tr> <td>COST OF ACQUISITION: {{contact.cost_of_acquisition}}  </td></tr>
+        <tr> <td>DEPRECIATION: {{contact.depreciation}}  </td></tr>
+        <tr> <td>BUSINESS PURPOSE: {{contact.business_purpose}}  </td></tr>
+        <tr> <td>OWNER: {{contact.owner}}  </td></tr>
+        <tr> <td>RECURRENT EXPENDITURE PER ANNUM: {{contact.recurrent_exp_perannum}}  </td></tr>
+        <tr> <td>LOCATION: {{contact.location}}  </td></tr>
+        <tr> <td>TYPE: {{contact.contype}}  </td></tr>
+        <tr> <td>TECHNICAL DETAILS: {{contact.technical_details}}  </td></tr>
+        <tr> <td>HISTORICAL COST : {{contact.historical_cost}}  </td></tr>
+      </table>
+    </div>
+</div>
+<hr />
+{% endfor %}  
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+
+</div>
+{% endblock %}

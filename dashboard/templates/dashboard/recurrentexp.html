@@ -1,0 +1,241 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+{% load mathfilters %}
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<div style="font-size:21px;margin-bottom:30px;font-weight:200;line-height:2.1428571435;color:inherit;">
+<div class="row" >
+    <div class="col-md-4">
+        <h4>FINANCIAL ANALYSIS & RECURRENT EXPENDITURE</h4>
+        
+    </div>
+    
+   
+ 
+</div>
+
+<div class="panel-group" id="accordion">
+    {% for fd in group %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+                   {{ fd.groupname }}</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N {{fd.amt}}  
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if fd.groupupdown >= 1 %}UP {{fd.groupupdown}}%{% endif %}&nbsp;&nbsp;
+                
+                <a  data-toggle="collapse" href="#collapse_hst{{ forloop.counter }}"> VIEW PREVIOUS  </a>
+                </div>
+            </h4>
+        </div>
+        <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table class="table table-hover">
+
+                    {% for cfd in    financialanalysisdata         %}
+                  
+                    {% if cfd.groupname ==  fd.groupname %}
+                    <tr>
+                        <td>
+                            {{ cfd.subgroupname }}
+                        </td>
+                        <td>
+                                {{ cfd.subgroupcount }}
+                        </td>                        
+                        <td>
+                            {{ cfd.amount }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                    No children!
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+
+        <div id="collapse_hst{{ forloop.counter }}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                    <tr>
+                            <td>
+
+                            </td>
+                                <td align="right">
+                                    {{year|sub:3}}
+                                </td>
+                                <td align="right">
+                                    {{year|sub:2}}
+                                </td>
+                                <td align="right">
+                                    {{year|sub:1}}
+                                </td>                                
+                        </tr>    
+                        {% for cfd in    financialanalysisdata         %}
+                      
+                        {% if cfd.groupname ==  fd.groupname %}
+
+                        <tr>
+                            <td>
+                                {{ cfd.subgroupname }}
+                            </td>
+                            <td align="right">
+                                ({{ cfd.prv_count_3 }})&nbsp;
+                                {{ cfd.prv_amount_3 }}
+                            </td>
+                            <td align="right">
+                                ({{ cfd.prv_count_2 }})&nbsp;
+                                {{ cfd.prv_amount_2 }}
+                            </td>
+                            <td align="right">
+                                ({{ cfd.prv_count_1 }})&nbsp;
+                                {{ cfd.prv_amount_1 }}
+                            </td>                                                            
+                        </tr>
+                        {% endif %}
+                        {% empty %}
+                        No children!
+                        {% endfor %}
+    
+                    </table>
+                   <p  align="right"> VIEW GRAPH</p>
+                </div>
+            </div>        
+    </div>
+    {% empty %}
+    No Data!
+    {% endfor %}
+</div>
+
+
+ <!--<div class="row" >
+    <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+     <p>SOFTWARE    N 36,000,666.22     <a  data-toggle="collapse" href="#testdata"> VIEW PREVIOUS  </a>  </p> 
+     <div class="collapse" id="testdata">
+        <div class="row" >
+            <div class="col-md-1" > 2015 </div>  
+            <div class="col-md-3"> <span class="grnspn"> HP SERVERS  </span>      </div> 
+            <div class="col-md-1" > <span  class="grnspn"> 5.2  </span>   </div>  
+         </div> 
+     </div>
+    </div> 
+</div>-->
+  
+     
+  
+<!--<div class="row" >
+    <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+     <p>HARDWARE    N 36,000,666.22   <span style="color:red"> UP 6% </span>   
+      <a   data-toggle="collapse" href="#collapseExample"  > VIEW PREVIOUS  </a>  </p> 
+    </div> 
+ </div>
+    <div class="collapse" id="collapseExample">
+    <div class="row" >
+           <div class="col-md-3">      </div> 
+             <div class="col-md-1" > </div> 
+             <div class="col-md-1" > 2015 </div>  
+                   <div class="col-md-1" > </div> 
+                    <div class="col-md-1" > </div> 
+            <div class="col-md-1" > 2016 </div>  
+            <div class="col-md-1" > </div> 
+            <div class="col-md-1" > </div> 
+          <div class="col-md-1" > 2017</div> 
+            <div class="col-md-1" > </div> 
+   
+          <div class="col-md-3"> <span class="grnspn"> HP SERVERS  </span>      </div> 
+       <div class="col-md-1" >    </div>  
+           <div class="col-md-1"    >        
+              <span  class="grnspn">    (2) </span>      </div>   
+             <div class="col-md-1" > <span  class="grnspn"> 5.2  </span>   </div>  
+       <div class="col-md-1" >    </div> 
+     <div class="col-md-1" > <span  class="grnspn"> (2)  </span>    </div>  
+     <div class="col-md-1" ><span  class="grnspn">   6-5   </span>   </div>  
+       <div class="col-md-1" >    </div> 
+         <div class="col-md-1" ><span  class="grnspn">  ( 3)  </span>     </div>  
+     <div class="col-md-1" > <span  class="grnspn">  7.2    </span>   </div>  
+
+
+        <div class="col-md-3" > <span  class="grnspn"> ORACLE SERVERS  </span>   </div>   
+       <div class="col-md-1" >    </div> 
+            <div class="col-md-1"    >  <span  class="grnspn">           (2)  </span>     </div>   
+             <div class="col-md-1" > <span  class="grnspn"> 5.2   </span>  </div>  
+       <div class="col-md-1" >    </div> 
+     <div class="col-md-1" ><span  class="grnspn">  (2) </span>     </div>  
+     <div class="col-md-1" > <span  class="grnspn">  6-5   </span>   </div>  
+       <div class="col-md-1" >    </div> 
+         <div class="col-md-1" > <span  class="grnspn"> ( 3)  </span>     </div>  
+     <div class="col-md-1" >  <span  class="grnspn"> 7.2   </span>    </div>  
+
+       <div class="col-md-3" > <span  class="grnspn"> ROUTERS  </span>   </div>   
+       <div class="col-md-1" >    </div> 
+            <div class="col-md-1"    >       <span  class="grnspn">      (2)   </span>    </div>   
+             <div class="col-md-1" > <span  class="grnspn"> 5.2   </div>  
+       <div class="col-md-1" >    </div> 
+     <div class="col-md-1" > <span  class="grnspn"> (2)  </span>    </div>  
+     <div class="col-md-1" > <span  class="grnspn">  6-5  </span>    </div>  
+       <div class="col-md-1" >    </div> 
+         <div class="col-md-1" > <span  class="grnspn"> ( 3)  </span>     </div>  
+     <div class="col-md-1" >  <span  class="grnspn"> 7.2   </span>    </div>  
+                                  </div> 
+
+        <div class="row">
+     <div class="col-md-10"></div>  <div class="col-md-2"> VIEW GRAPH</div>  
+        
+        </div>
+</div>
+    <div class="collapse show"> 
+    <div class="row" >
+           <div class="col-md-4">HP SERVERS       </div> 
+           <div class="col-md-4"    >            2     </div>   
+             <div class="col-md-4" > 5,000,00.66.22    </div>  
+        <div class="col-md-4" > ORACLE SERVERS   </div>   
+          <div class="col-md-4" > 6  </div>  
+       <div class="col-md-4" >  5.000,000 </div>
+     <div class="col-md-4" >ROUTERS        </div>
+    <div class="col-md-4" >   15       </div>       
+    <div class="col-md-4" >  26, 000,000  </div>  
+
+                                  </div> 
+    
+    <div class="row" >
+    <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+     <p> CONNECTIVITY  N 36,000,666.22    <a  > VIEW PREVIOUS  </a>  </p> 
+    </div> 
+</div>
+  
+<div class="row" >
+    <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+     <p>STORAGE /BC  N 36,000,666.22    <a  > VIEW PREVIOUS  </a>  </p> 
+    </div> 
+</div>
+ 
+<div class="row" >
+    <div class="col-md-12" style="border:solid;border-color:black;margin-bottom:30px;">
+     <p>HARDWARE    N 36,000,666.22   <a  > VIEW PREVIOUS  </a>  </p> 
+    </div> 
+</div>
+
+        </div>
+    <div class="row" >
+    <div class="col-md-4"   >
+     
+    </div>  <div class="col-md-1"   >Back   
+     
+    </div><div class="col-md-1"   > |</div> <div class="col-md-1"   > Next
+     
+    </div> 
+         <div class="col-md-4"   >
+     
+    </div> 
+</div>-->
+
+ </div>
+  
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+</div>
+{% endblock %}

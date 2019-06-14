@@ -1,0 +1,112 @@
+﻿ 
+{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.bundle.min.js" type="text/javascript"></script>
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+
+<div class="container">
+
+     <div class="page-header">
+           
+          
+    </div>
+    <div class="row">
+    	 
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-danger">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <div class="col-md-4"> 
+                                <a href="/accesslogweek" >WEEK </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4"> 
+                                 <a href="/accesslogmonth">MONTH</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4"> 
+                                <a href="/accesslogytd" >YTD</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-4">    
+                                <a href="/accesslogpytd">PREVIOUS YEARS</a>
+                                </div>
+                            </li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                            <canvas id="myChart"></canvas>
+                      
+                    </div>
+                </div>
+
+                <div class="panel-footer" >
+
+                    <div class="row">  <div class="col-md-4"></div>
+                       <div class="col-md-9"> 
+                            <div  id="tab1danger"></div>
+                        {% for usrdata in usrloggroup %}
+                        <div class="row" >
+                            <div class="col-md-3"> 
+                                
+                            </div>
+                             <div class="col-md-3">{{usrdata.nm}}  </div>
+                             <div class="col-md-2">{{usrdata.cnt}} </div>
+                             <div class="col-md-4"> </div>
+                        </div>
+                        {% endfor %}
+                        
+                        </div>
+                       </div>
+                   
+                </div>
+                    
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script type="text/javascript">
+function removeLastComma(strng){        
+    var n=strng.lastIndexOf(",");
+    var a=strng.substring(0,n) 
+    return a;
+}
+
+   var logdata = '{% for acdata in acloggroup %}"{{acdata.cnt}}",{% endfor %}';
+   logdata = removeLastComma(logdata)
+   logdata = '['+logdata+']'
+
+     var labeldata = '{% for acdata in acloggroup %}"{{acdata.pagename}}",{% endfor %}';
+     labeldata = removeLastComma(labeldata)
+     labeldata = '['+labeldata+']'
+
+    var defaultLabels = JSON.parse(labeldata);
+         var defaultData   = JSON.parse(logdata);
+       var ctx = document.getElementById("myChart").getContext("2d");
+       var myChart = new Chart(ctx, {
+type: 'line',
+data: {
+    labels: defaultLabels,
+    datasets: [{
+	lineTension: 0,
+	label: 'Activity Profile',
+	data: defaultData,
+    }]
+}
+})
+
+   </script> 
+
+ </div>
+{% endblock %}

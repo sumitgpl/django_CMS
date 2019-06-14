@@ -1,0 +1,84 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<div style="padding:30px;font-size:21px;margin-bottom:30px;font-weight:200;line-height:2.1428571435;color:inherit;">
+<div class="row" >
+    <div class="col-md-4">
+        <h4>ICT MATURITY SCORE</h4>
+        
+    </div>
+    
+   
+ 
+</div>
+ <div class="row" >
+    <div class="col-md-12"  >
+    
+    </div> 
+</div>
+  
+     <hr />
+  
+   
+         {% load staticfiles %}
+        <div class="list-group" style="background-color:gainsboro;padding:30px; border-color:black;border-radius:initial;border-style:solid;border-width:thin">
+              
+
+            <table class="col-md-12">
+                <thead style="background-color:coral;height:30px;">
+                <tr><td  class="col-md-5"></td>
+                    <td  class="col-md-1">0</td>
+                    <td class="col-md-1 st">1</td>
+                    <td class="col-md-1">2</td>
+                    <td class="col-md-1">3</td>
+                    <td class="col-md-1">4</td>
+                    <td class="col-md-1">5</td>
+                    <td class="col-md-1">6</td></tr>
+                </thead>
+                <tbody > 
+
+                <tr  >
+                <td  class="col-md-5">  </td>
+                <td  class="col-md-1"></td>
+                <td  class="col-md-1"  ></td>
+                <td  class="col-md-1" > </td>
+                <td  class="col-md-1"  ></td>
+                <td  class="col-md-1" ></td>
+                <td  class="col-md-1"  ></td>
+                <td  class="col-md-1"></td>
+                
+                </tr>
+            {% for ictdata in ictlist %}
+            <tr>
+                <td  class="col-md-5">{{ictdata.parameter}} </td>
+                <td  class="col-md-1"  style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "0" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1"  style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "1" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1" style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "2" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1" style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "3" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1" style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "4" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1" style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "5" %}{{ictdata.score}}{% endif %}</td>
+                <td  class="col-md-1" style="border-right-style:solid;border-right-color:black;border-right-width:1px;">{% if ictdata.score == "6" %}{{ictdata.score}}{% endif %}</td>
+                
+            </tr>
+            {% endfor %}  
+            
+               </tbody>
+            </table>
+   
+</div>
+       
+         {% block img %}{% endblock %}
+ 
+       
+ </div>
+  
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+</div>
+{% endblock %}
+
+

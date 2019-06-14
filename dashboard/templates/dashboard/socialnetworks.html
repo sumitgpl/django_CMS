@@ -1,0 +1,62 @@
+﻿{% extends "dashboard/adminlayout.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+<div style="padding:20px;font-size:21px;margin-bottom:30px;font-weight:200;line-height:2.1428571435;color:inherit;">
+<div class="row" >
+    <div class="col-md-4">
+        <h4> </h4>
+        
+    </div>
+    
+   
+ 
+</div>
+ <div class="row" >
+    <div class="col-md-12"  >
+    
+    </div> 
+</div>
+  
+     <hr />
+  
+   
+         {% load staticfiles %}
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action">   <img src={% static 'dashboard/img/sn1.png' %} /> <a href="{{linklist.twitterfollow}}" class="list-group-item list-group-item-action"><small>Followers   </small> </a>  <a href="{{linklist.twitterposts}}" class="list-group-item list-group-item-action"><small>Posts</small></a> <a href="{{linklist.twitterreplies}}" class="list-group-item list-group-item-action"><small>Replies</small>  </a>
+  <a href="#" class="list-group-item list-group-item-action">   <img src={% static 'dashboard/img/sn2.png' %} /> <a href="{{linklist.skypefollow}}" class="list-group-item list-group-item-action"><small>Followers   </small> </a> <a href="{{linklist.skypeposts}}" class="list-group-item list-group-item-action"><small>Posts</small></a>  <a href="{{linklist.skypereplies}}" class="list-group-item list-group-item-action"> <small>Replies</small>  </a>
+  <a href="#" class="list-group-item list-group-item-action disabled">   <img src={% static 'dashboard/img/sn3.png' %} />  <a href="{{linklist.linkedidfollow}}" class="list-group-item list-group-item-action"><small>Followers   </small> </a> <a href="{{linklist.linkedidposts}}" class="list-group-item list-group-item-action"><small>Posts</small> </a> <a href="{{linklist.linkedidreplies}}" class="list-group-item list-group-item-action"> <small>Replies</small>  </a>
+</div>
+
+    <div class="row" style="padding:20px;">
+
+        SUMMARY 
+    </div>
+    <div class="row" style="padding:20px;">
+
+            {{linklist.summary}} 
+        </div>
+    
+    <div class="row" style="padding:20px;">
+
+        CLICK TO NETWORK 
+    </div>   
+      <div class="row" style="padding:20px;">
+            <img src={% static 'dashboard/img/sn1.png' %} /> <img src={% static 'dashboard/img/sn2.png' %} /> <img src={% static 'dashboard/img/sn3.png' %} />
+      </div> 
+   
+
+         {% block img %}{% endblock %}
+ 
+       
+ </div>
+  
+<div style="padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;"></div>
+
+ 
+</div>
+{% endblock %}
