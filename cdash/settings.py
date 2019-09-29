@@ -97,16 +97,7 @@ WSGI_APPLICATION = 'cdash.wsgi.application'
 # }
 
 # server db
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cdash',
-        'USER': 'root',
-        'PASSWORD': 'NxMXJ4TFUT9e',
-        'HOST': '213.136.77.10',
-        'PORT': '3306',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
